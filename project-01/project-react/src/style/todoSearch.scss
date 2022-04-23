@@ -1,0 +1,30 @@
+.search{
+
+    justify-content: center;
+    display: flex;
+
+    label{
+        font-size:20px;
+        display:flex;
+        flex-direction: column;
+        text-align: center;    
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    input{
+        border: solid 2px #a945c7;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 0.2rem;
+        font-size: 20px;    
+        color: #a945c7;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 9%);        
+
+        
+    }
+
+    input:focus{
+        outline-color: fuchsia;
+    }
+}

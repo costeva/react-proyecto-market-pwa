@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include("templates/head.ejs", {title:"Registro de usuario"}) %>
+
+    <body>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+            <symbol id="cloud-up" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708
+13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.
+445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.
+5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+            </symbol>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.
+75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.
+465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 
+1 0 2z" />
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 
+0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </symbol>
+        </svg>
+        <div class="page login-page" id="app">
+            <div class="container">
+                <div id="form-signup" class="form-holder has-shadow" style="margin: 0; display: none">
+                    <!-- Logo & Information Panel-->
+                    <div class="bg-white">
+                        <div class="p-4">
+                            <img src="/img/logo-horizontal-color.svg" alt="" />
+                        </div>
+                        <div class="separacion"></div>
+                        <header class="px-4">
+                            Bienvenido al proceso de registro como proveedor
+                        </header>
+
+                        <div class="form d-flex flex-column justify-content-between pt-0">
+                            <div class="content d-flex justify-content-between">
+                                <div style="width: 100%">
+                                    <transition name="fade" mode="out-in">
+                                        <div>
+                                            <div class="tab" key="1" v-show="step == 1">
+                                            </div>
+
+                                            <div class="tab" key="2" v-show="step == 2">
+                                                <form @submit.prevent="onSubmitStep2" id="signup-form1"
+                                                    style="max-width: 100%" autocomplete="off" class="needs-validation"
+                                                    :class="[showErrorsForm? 'was-validated':'']" novalidate>
+                                                    <div class="d-flex justify-content-center px-4 pb-3">
+                                                        <h2 style="color: #4e4e4e" class="pb">
+                                                            Ahora unos datos sobre ti y tu empresa.
+                                                        </h2>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center px-4">
+                                                        <div class="d-flex justify-content-center px-4 pb-3">
+                                                            <div class="row g-3 px-4 mt-3" style="max-width: 680px">
+                                                                <div class="col-12">
+                                                                    <h4 style="color: #737373">Datos personales</h4>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom01"
+                                                                        class="label-material">Nombre:</label>
+                                                                    <input type="text" v-model="name"
+                                                                        class="input-material" id="validationCustom01"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un nombre.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom02"
+                                                                        class="label-material">Apellido:</label>
+                                                                    <input type="text" v-model="surname"
+                                                                        class="input-material" id="validationCustom02"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un apellido.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-12 mt-5">
+                                                                    <h4 style="color: #737373">
+                                                                        Datos de mi empresa
+                                                                    </h4>
+                                                                </div>
+                                                                <div
+                                                                    :class="[identifications_type_id ==1? 'col-md-6 px-2':'col-12 px-2']">
+                                                                    <label for="validationCustom03"
+                                                                        class="label-material">Nombre comercial:</label>
+                                                                    <input type="text" v-model="nombre_comercial"
+                                                                        class="input-material" id="validationCustom03"
+                                                                        @change="identifications_type_id !=1?razon_social=nombre_comercial :''"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un nombre comercial.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div v-show="identifications_type_id ==1"
+                                                                    class="col-md-6 px-2">
+                                                                    <label for="validationCustom04"
+                                                                        class="label-material">Razón social:</label>
+                                                                    <input type="text" v-model="razon_social"
+                                                                        class="input-material" id="validationCustom04"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un razón social.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom05"
+                                                                        class="label-material">{{
+                                                                        identifications_type_id == 1
+                                                                        ? "Inscripción AFIP:"
+                                                                        : "Tipo de Inscripción"
+                                                                        }}</label>
+                                                                    <select v-model="afip_registration_type_id" required
+                                                                        id="validationCustom05" class="w-100 mt-1"
+                                                                        style="
+                                    height: calc(2.25rem + 2px);
+                                    border: 1px solid #dee2e6;
+                                  " :disabled="identifications_type_id != 1">
+                                                                        <option v-for="type in afipTypes"
+                                                                            :value="type.id">
+                                                                            {{ type.name }}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom06"
+                                                                        class="label-material">{{
+                                                                        identifications_type_id == 1
+                                                                        ? "CUIT"
+                                                                        : identifications_type
+                                                                        }}:</label>
+                                                                    <input type="text" v-model="numero_identificacion"
+                                                                        class="input-material" id="validationCustom06"
+                                                                        readonly disabled />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un razón social.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+
+                                                                <div class="col-12 mt-5">
+                                                                    <h4 style="color: #737373">Contraseña</h4>
+                                                                </div>
+
+                                                                <div class="col-12">
+                                                                    <div class="alert alert-light d-flex align-items-center"
+                                                                        role="alert">
+                                                                        <svg class="bi flex-shrink-0 me-2" width="24"
+                                                                            height="24" role="img" aria-label="Info:">
+                                                                            <use xlink:href="#info-fill" />
+                                                                        </svg>
+                                                                        <div>
+                                                                            La contraseña debe contener al menos 8
+                                                                            caracteres, una mayúscula, una minúscula y
+                                                                            un numero.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom07"
+                                                                        class="label-material">Contraseña:</label>
+                                                                    <input type="password" v-model="password"
+                                                                        class="input-material" id="validationCustom07"
+                                                                        required />
+                                                                    <div v-show="showErrorPassword  && passwordMessage != 'Las contraseñas no coinciden' "
+                                                                        style="
+                                    width: 100%;
+                                    margin-top: 0.25rem;
+                                    font-size: 0.875em;
+                                    color: #dc3545;
+                                  ">
+                                                                        {{ passwordMessage }}
+                                                                    </div>
+
+                                                                    <div v-show="passwordMessage == null && showErrorsForm"
+                                                                        style="
+                                    width: 100%;
+                                    margin-top: 0.25rem;
+                                    font-size: 0.875em;
+                                    color: #198754;
+                                  ">
+                                                                        Correcto
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom08"
+                                                                        class="label-material">Repetir
+                                                                        contraseña:</label>
+                                                                    <input type="password" v-model="password2"
+                                                                        class="input-material" id="validationCustom08"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, repite la contraseña.
+                                                                    </div>
+                                                                    <div v-show="passwordMessage == null && showErrorsForm"
+                                                                        style="
+                                    width: 100%;
+                                    margin-top: 0.25rem;
+                                    font-size: 0.875em;
+                                    color: #198754;
+                                  ">
+                                                                        Correcto
+                                                                    </div>
+                                                                    <div v-show="showErrorsForm && showErrorPassword  && passwordMessage == 'Las contraseñas no coinciden' "
+                                                                        style="
+                                    width: 100%;
+                                    margin-top: 0.25rem;
+                                    font-size: 0.875em;
+                                    color: #dc3545;
+                                  ">
+                                                                        {{ passwordMessage }}
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="d-flex flex-column flex-md-row justify-content-around mt-4">
+                                                                    <div>
+                                                                        <button class="btn btn-primary"
+                                                                            @click="decrementStep" type="button"
+                                                                            :disabled="
+                                    isloading ">
+                                                                            <div class="d-inline-block">
+                                                                                <div class="spinner-border spinner-border-sm"
+                                                                                    v-show="isloading" role="status">
+                                                                                </div>
+                                                                            </div>
+                                                                            Volver
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="mt-2 mt-md-0">
+                                                                        <button class="btn btn-primary" type="submit">
+                                                                            <div class="d-inline-block">
+                                                                                <div class="spinner-border spinner-border-sm"
+                                                                                    v-show="isloading" role="status">
+                                                                                </div>
+                                                                            </div>
+                                                                            Continuar
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="tab" key="3" v-show="step == 3">
+                                                <form @submit.prevent="onSubmitConfirm" id="signup-form2"
+                                                    style="max-width: 100%" autocomplete="off" class="needs-validation"
+                                                    :class="[showErrorsForm? 'was-validated':'']" novalidate>
+                                                    <div class="d-flex justify-content-center px-4 pb-3">
+                                                        <h2 style="color: #4e4e4e" class="pb">
+                                                            Ya casi terminamos, ahora necesitamos saber un poco
+                                                            más sobre tu empresa.
+                                                        </h2>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center px-4">
+                                                        <div class="d-flex justify-content-center px-4 pb-3">
+                                                            <div class="row g-3 px-4 mt-3" style="max-width: 680px">
+                                                                <div class="col-12">
+                                                                    <h4 style="color: #737373">
+                                                                        Datos de contacto
+                                                                    </h4>
+                                                                </div>
+
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom09"
+                                                                        class="label-material">Teléfono:</label>
+                                                                    <input type="tel" v-model="phone"
+                                                                        class="input-material" id="validationCustom09"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un teléfono.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+
+
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom10"
+                                                                        class="label-material">Email:</label>
+                                                                    <input type="email" v-model="email_contacto"
+                                                                        class="input-material" id="validationCustom10"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un email.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom11"
+                                                                        class="label-material">Dirección:</label>
+                                                                    <input type="text" v-model="address"
+                                                                        class="input-material" id="validationCustom11"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa una dirección.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom12"
+                                                                        class="label-material">Sitio web:</label>
+                                                                    <input type="text" v-model="website_url"
+                                                                        class="input-material" id="validationCustom12"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un sitio web.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-12 mt-5">
+                                                                    <h4 style="color: #737373">
+                                                                        Datos de mi empresa
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="col-md-12 px-2">
+                                                                    <label for="validationCustom13"
+                                                                        class="label-material">Adjunte Brochure/Brief o
+                                                                        presentación de la
+                                                                        misma en PDF:</label>
+                                                                    <input type="file" id="validationCustom13"
+                                                                        ref="file" style="display: none"
+                                                                        accept="application/pdf" @change="loadFile" />
+                                                                    {{ brief ? brief.value : "" }}
+
+                                                                    <button type="button" @click="$refs.file.click()"
+                                                                        class="form-control w-100 d-flex justify-content-center align-items-center mt-3"
+                                                                        id="button-brief" style="height: auto">
+                                                                        <span style="
+                                      display: inline-block;
+                                      max-width: 300px;
+                                      white-space: nowrap;
+                                      margin-right: 8px;
+                                      overflow: hidden !important;
+                                      text-overflow: ellipsis;
+                                    ">
+                                                                            {{
+                                                                            brief ? brief.name : "Subir Archivo"
+                                                                            }}</span>
+
+                                                                        <svg class="bi flex-shrink-0 me-2" width="24"
+                                                                            height="24" role="img" aria-label="Cloud:">
+                                                                            <use xlink:href="#cloud-up" />
+                                                                        </svg>
+                                                                    </button>
+                                                                    <div class="progress" v-if="progressBarFile>0">
+                                                                        <div class="progress-bar bg-success"
+                                                                            role="progressbar"
+                                                                            :style="`width: ${progressBarFile}%`"
+                                                                            :aria-valuenow="progressBarFile"
+                                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa un nombre comercial.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom14"
+                                                                        class="label-material">Cantidad de personal en
+                                                                        relación
+                                                                        de dependencia:</label>
+                                                                    <input type="number" v-model="cant_staff"
+                                                                        class="input-material" id="validationCustom14"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa una cantidad.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-6 px-2">
+                                                                    <label for="validationCustom15"
+                                                                        class="label-material">Cantidad de
+                                                                        vehículos y maquinaria pesada propia:</label>
+                                                                    <input type="number" v-model="cant_vehicles"
+                                                                        class="input-material" id="validationCustom15"
+                                                                        required />
+                                                                    <div class="invalid-feedback">
+                                                                        Por favor, ingresa una cantidad.
+                                                                    </div>
+                                                                    <div class="valid-feedback">Correcto</div>
+                                                                </div>
+                                                                <div class="col-md-12 px-2">
+                                                                    <label for="validationCustom16"
+                                                                        class="label-material">¿Cuenta con certificación
+                                                                        para
+                                                                        sistemas de
+                                                                        gestión, sostenibilidad, entre otros? (Ej.:
+                                                                        ISO 9001, ISO 14001, BASC, etc.)</label>
+                                                                    <select v-model="checkboxcert"
+                                                                        id="validationCustom16" class="w-100 mt-1"
+                                                                        style="
+                                    height: calc(2.25rem + 2px);
+                                    border: 1px solid #dee2e6;
+                                  ">
+                                                                        <option :value="false" selected>No</option>
+                                                                        <option :value="true">Si</option>
+                                                                    </select>
+                                                                    <div class="input-group mt-3" v-show="checkboxcert">
+                                                                        <span class="input-group-text"
+                                                                            id="basic-addon3">Detalle las mismas:</span>
+
+                                                                        <input type="text" v-model="certifications"
+                                                                            class="form-control" id="validationCustom17"
+                                                                            aria-describedby="basic-addon3"
+                                                                            maxlength="60"
+                                                                            :required="checkboxcert == true " />
+                                                                        <div class="invalid-feedback">
+                                                                            Por favor, ingresa detalle.
+                                                                        </div>
+                                                                        <div class="valid-feedback">Correcto</div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="d-flex flex-column flex-md-row justify-content-around mt-4">
+                                                                    <div>
+                                                                        <button class="btn btn-primary"
+                                                                            @click="decrementStep" type="button">
+                                                                            Volver
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="mt-2 mt-md-0">
+                                                                        <button class="btn btn-primary" type="submit">
+                                                                            Continuar
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                </div>
+                                </transition>
+                                <div style="text-align: center; margin-top: 40px">
+                                    <template v-for="n in steps">
+                                        <span class="step" :class="{'active':n==step}"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p style="color: #676767; text-align: center; margin-top: 30px">
+                                ¿Ya tienes un usuario?
+                                <a href="/"> Ingresa </a>
+                            </p>
+                        </div>
+                    </div>
+                    <footer></footer>
+                </div>
+            </div>
+
+            <!-- Modal -->
+        </div>
+
+        <div class="modal fade" id="exampleModalConfirmn" tabindex="-1" aria-labelledby="exampleModalLabel"
+            data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Confirmar si son correctos los datos.
+                        </h5>
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>
+                            Una vez finalizado el registro, estos datos no van a poder ser
+                            modificados
+                        </p>
+                        <p class="fw-bolder">
+                            ¿Está seguro que desea finalizar el registro?
+                        </p>
+                        <div class="text-center">
+                            <i class="bx bx-error-circle"></i>
+                        </div>
+                        <ul class="list-unstyled mt-3">
+                            <li>
+                                <i class="bx bx-check"></i>
+                                <span class="fw-bolder">CUIT:</span>
+                                {{ numero_identificacion }}
+                            </li>
+                            <hr />
+                            <li>
+                                <i class="bx bx-check"></i><span class="fw-bolder">Nombre Comercial:</span>
+                                {{ nombre_comercial }}
+                            </li>
+                            <hr />
+                            <li>
+                                <i class="bx bx-check"></i><span class="fw-bolder">Razón Social:</span>
+                                {{ razon_social }}
+                            </li>
+                            <hr />
+                            <li>
+                                <i class="bx bx-check"></i><span class="fw-bolder"> Inscripción AFIP:</span>
+                                {{ afip_filter_type?.name }}
+                            </li>
+                            <hr />
+                        </ul>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-around">
+                            <div class="mx-2">
+                                <!--  <a class=" btn btn-primary" @click="onSubmitStep3" href="#" role="button">
+                    Aceptar
+                  </a> -->
+                                <button @click="onSubmitStep3" class="btn btn-primary" type="submit"
+                                    :disabled="isloading ">
+                                    <div class="d-inline-block">
+                                        <div class="spinner-border spinner-border-sm" v-show="isloading" role="status">
+                                        </div>
+                                    </div>
+                                    Finalizar registro
+                                </button>
+                            </div>
+                            <div class="mx-2">
+                                <a @click="cerrar" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close"
+                                    href="#" role="button">
+                                    Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Resultado del registro
+                        </h5>
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                    </div>
+                    <div class="modal-body">
+                        {{ messagePost }}
+                        <br />
+                        <a @click="generatePDF" href="#" v-if="messagePost!='Algo ha salido mal'">
+                            Descargar copia de formulario
+                        </a>
+
+                        <div class="d-flex justify-content-center mt-3">
+                            <a class="btn btn-primary" href="/" role="button"
+                                v-if="messagePost!='Algo ha salido mal'">Ir a iniciar
+                                sesión</a>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+					 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+	
+					</div> -->
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <script src="js/intlTelInput.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/maska@1.4.4/dist/maska.js"></script>
+        <script src="/js/jspdf.umd.min.js"></script>
+
+
+
+        <script>
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        identifications_type: "RUT",
+                        identifications_type_id: 1, //CUIT por defecto
+                        numero_identificacion: "",
+                        raw_numero_identificacion: "",
+                        validCuit: false,
+                        cuitMessage: "",
+                        email: "",
+                        validEmail: false,
+                        emailMessage: "",
+                        showErrors: false,
+                        showErrorsForm: false,
+                        steps: 3,
+                        step: 1,
+                        name: "",
+                        surname: "",
+                        nombre_comercial: "",
+                        razon_social: "",
+                        password: "",
+                        password2: "",
+                        showErrorPassword: false,
+                        messagePost: "",
+                        isloading: false,
+                        afip_registration_type_id: 1,
+                        afipTypes: [],
+                        brief: null,
+                        progressBarFile: null,
+                        phone: null,
+                        address: null,
+                        email_contacto: null,
+                        website_url: null,
+                        cant_staff: null,
+                        cant_vehicles: null,
+                        checkboxcert: false,
+                        certifications: null,
+                        country_id: 11,
+                        countries: [],
+                        dateRegister: null,
+                        modal: null,
+                    };
+                },
+                created() {
+                    let urlParams = new URLSearchParams(window.location.search);
+                    if (urlParams.has("nocuit")) this.identifications_type_id = 2;
+                },
+                mounted() {
+                    this.focusInput();
+                    this.getAfipRegistrationTypes();
+                    this.getCountries();
+                    document.getElementById("form-signup").style.display = "block";
+                    this.modal = new bootstrap.Modal(
+                        document.getElementById("exampleModalConfirmn")
+                    );
+
+                    var inputPepe = document.querySelector("#validationCustom09");
+                    window.intlTelInput(inputPepe, {
+                        utilsScript: "js/utils.js",
+
+                    });
+
+                },
+                computed: {
+                    afip_types_options: function () {
+                        //si empresa es argentina filtro quitando la opcion con id 1
+                        if (this.identifications_type_id === 1) {
+                            return this.afipTypes.filter((type) => type.id != 1);
+                        } else {
+                            return this.afipTypes;
+                        }
+                    },
+
+                    afip_filter_type: function () {
+                        return this.afipTypes.find(
+                            (t) => t.id === this.afip_registration_type_id
+                        );
+                    },
+
+                    passwordMessage: function () {
+                        if (this.password.length == 0)
+                            return "Por favor, ingresa una contraseña.";
+                        this.showErrorPassword = true;
+                        if (this.password.length < 8)
+                            return "El password debe tener al menos 8 caracteres";
+                        if (!/[A-Z]/.test(this.password))
+                            return "El password debe tener al menos una letra mayúscula";
+                        if (!/[a-z]/.test(this.password))
+                            return "El password debe tener al menos una letra minúscula";
+                        if (!/[0-9]/.test(this.password))
+                            return "El password debe tener al menos un número";
+                        if (this.password != this.password2)
+                            return "Las contraseñas no coinciden";
+                        else return null;
+                    },
+                },
+                methods: {
+                    onSubmitConfirm(e) {
+                        if (e.target.checkValidity()) {
+                            this.showErrorsForm = false;
+                            this.modal.show();
+
+                        } else {
+                            this.showErrorsForm = true;
+                        }
+                    },
+
+                    cerrar(e) {
+                        this.modal.hide();
+                    },
+
+                    onProgress(percent) {
+                        this.progressBarFile = percent;
+                    },
+                    getAfipRegistrationTypes() {
+                        axios
+                            .get(`/api/afip_registration/types`)
+                            .then((response) => {
+                                this.afipTypes = response.data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    },
+                    getCountries() {
+                        axios
+                            .get(`/api/countries`)
+                            .then(({ data }) => {
+                                this.countries = data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    },
+                    incrementStep() {
+                        this.step = this.step + 1;
+                        this.showErrorsForm = false;
+                        this.showErrorPassword = false;
+                    },
+                    decrementStep() {
+                        this.step = this.step - 1;
+                        this.showErrorsForm = false;
+                        this.showErrorPassword = false;
+                    },
+                    onSubmitStep2(e) {
+                        if (this.step != 2) {
+                            return;
+                        }
+                        if (e.target.checkValidity() && this.passwordMessage == null) {
+                            this.showErrorsForm = false;
+                            this.step++;
+                        } else {
+                            this.showErrorsForm = true;
+                            this.showErrorPassword = true;
+                        }
+                    },
+                    checkEmail() {
+                        let re =
+                            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9
+                            +\.) + [a - zA - Z]{ 2, })) $/;;
+            if (!re.test(this.email)) {
+                this.validEmail = false;
+                this.showErrors = true;
+                this.emailMessage = "Formato no valido";
+                return;
+            }
+            this.isloading = true;
+
+            axios
+                .get(`/api/users/check_email/${this.email}`)
+                .then((response) => {
+                    if (response.data.status == 200) {
+                        this.showErrors = false;
+                        this.validEmail = true;
+                        this.emailMessage = response.data.message;
+                    }
+                    if (response.data.status == 226) {
+                        this.validEmail = false;
+                        this.showErrors = true;
+                        this.emailMessage =
+                            response.data.message +
+                            ". Por favor comunicarse con el soporte de Minexus para más información.";
+                    }
+                    this.isloading = false;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.emailMessage = "Hubo un error, vuelva a intentarlo";
+                    this.showErrors = true;
+                    this.isloading = false;
+                });
+          },
+            loadFile(event) {
+                if (event.target.files.length > 0) {
+                    if (event.target.files[0].size > 1048576 * 30) {
+                        alert("¡Archivo demasiado grande, el maximo es 30 mb!");
+                        this.brief = null;
+                    } else {
+                        this.brief = event.target.files[0];
+                    }
+                } else {
+                    this.brief = null;
+                }
+            },
+            onSubmitStep3(e) {
+                if (this.step != 3) {
+                    return;
+                }
+                let config;
+                if (this.brief) {
+                    let onProgress = this.onProgress;
+
+                    this.isUploadingFile = true;
+                    config = {
+                        onUploadProgress(progressEvent) {
+                            var percentCompleted = Math.round(
+                                (progressEvent.loaded * 100) / progressEvent.total
+                            );
+                            onProgress(percentCompleted);
+                            return percentCompleted;
+                        },
+                    };
+                }
+                if (e.target.checkValidity() && this.passwordMessage == null) {
+                    this.isloading = true;
+                    let data = {
+                        nombre_comercial: this.nombre_comercial,
+                        razon_social: this.razon_social,
+                        numero_identificacion:
+                            this.identifications_type_id == 1
+                                ? this.raw_numero_identificacion
+                                : `${this.identifications_type}:${this.raw_numero_identificacion}`,
+                        afip_registration_type_id: this.afip_registration_type_id,
+                        password: this.password,
+                        email: this.email,
+                        name: this.name,
+                        surname: this.surname,
+                        phone: this.phone,
+                        address: this.address,
+                        cant_staff: this.cant_staff,
+                        cant_vehicles: this.cant_vehicles,
+                        email_contacto: this.email_contacto,
+                        website_url: this.website_url,
+                        brief: this.brief,
+                        certifications: this.checkboxcert ? this.certifications : "",
+                        identifications_type_id: this.identifications_type_id,
+                        country_id: this.country_id,
+                    };
+                    let formData = new FormData();
+                    for (let key in data) {
+                        formData.append(key, data[key]);
+                    }
+
+                    axios
+                        .post(`/signup`, formData, config)
+                        .then((response) => {
+                            // handle success
+                            if (response.data.status == 200) {
+                                console.log(response.data);
+                                this.messagePost = response.data.message;
+                                this.dateRegister = new Date().toISOString();
+                            } else {
+                                this.messagePost = "Algo ha salido mal";
+                            }
+                            var myModal = new bootstrap.Modal(
+                                document.getElementById("exampleModal")
+                            );
+                            this.cerrar();
+                            myModal.show();
+                            this.isloading = false;
+                        })
+                        .catch((error) => {
+                            if (error.response) {
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                                console.log(error.response.headers);
+                                this.messagePost = error.response.status;
+                            } else {
+                                this.messagePost = "error";
+                            }
+
+                            console.log(error);
+                            this.isloading = false;
+                        });
+                } else {
+                    this.showErrorsForm = true;
+                    this.showErrorPassword = true;
+                }
+            },
+            checkCuit(event) {
+                this.raw_numero_identificacion = event.target.dataset.maskRawValue;
+                if (this.identifications_type_id != 1) {
+                    if (this.raw_numero_identificacion.length == 0) {
+                        this.validCuit = false;
+                        this.showErrors = true;
+                        this.cuitMessage = "Por favor completar este dato";
+                        return;
+                    } else {
+                        this.validCuit = true;
+                        return;
+                    }
+                }
+                if (this.raw_numero_identificacion.length == 0) {
+                    this.validCuit = false;
+                    this.showErrors = true;
+                    this.cuitMessage = "Por favor completar este dato";
+                    return;
+                }
+
+                if (this.raw_numero_identificacion.length < 11) {
+                    this.showErrors = false;
+                    this.validCuit = false;
+
+                    return;
+                }
+                let rexCuit = /\b(20|23|24|27|30|33|34)-[0-9]{8}-[0-9]{1}/;
+
+                if (!rexCuit.test(this.numero_identificacion)) {
+                    this.validCuit = false;
+                    this.showErrors = true;
+                    this.cuitMessage = "Formato no valido";
+                    return;
+                }
+                this.isloading = true;
+                axios
+                    .get(`/api/check_cuit/${this.raw_numero_identificacion}`)
+                    .then((response) => {
+                        // handle success
+                        if (response.data.status == 200) {
+                            this.showErrors = false;
+                            this.validCuit = true;
+                            this.cuitMessage = response.data.message;
+                        }
+                        if (response.data.status == 226) {
+                            this.validCuit = false;
+                            this.showErrors = true;
+                            this.cuitMessage =
+                                response.data.message +
+                                ". Por favor comunicarse con el soporte de Minexus para la creación de nuevos usuarios.";
+                        }
+                        this.isloading = false;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.isloading = false;
+                    });
+            },
+          async focusInput() {
+                this.$nextTick(function () {
+                    this.$refs.cuit.focus();
+                });
+            },
+            generatePDF() {
+                const { jsPDF } = window.jspdf;
+
+                const doc = new jsPDF();
+                doc.addImage("/img/MinexusCODIN-color.png", "PNG", 15, 15, 60, 9);
+
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(18);
+                let y = 40;
+                doc.text("Formulario de alta como proveedor.", 20, y);
+                y += 15;
+                doc.setFontSize(16);
+                doc.text("Datos personales.", 20, y);
+                doc.setFont("times", "normal");
+                doc.setFontSize(14);
+                if (this.numero_identificacion) {
+                    y += 10;
+                    if (this.identifications_type_id == 1)
+                        doc.text(`CUIT: ${this.numero_identificacion}`, 20, y);
+                    else
+                        doc.text(
+                            `${this.identifications_type}:${this.numero_identificacion}`,
+                            20,
+                            y
+                        );
+                }
+                if (this.email) {
+                    y += 10;
+                    doc.text(`Email: ${this.email}`, 20, y);
+                }
+                if (this.name) {
+                    y += 10;
+                    doc.text(`Nombre: ${this.name}`, 20, y);
+                }
+                if (this.surname) {
+                    y += 10;
+                    doc.text(`Apellido: ${this.surname}`, 20, y);
+                }
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(16);
+                y += 15;
+                doc.text("Datos empresa.", 20, y);
+                doc.setFont("times", "normal");
+                doc.setFontSize(14);
+
+                if (this.nombre_comercial) {
+                    y += 10;
+                    doc.text(`Nombre comercial: ${this.nombre_comercial}`, 20, y);
+                }
+                if (this.razon_social) {
+                    y += 10;
+                    doc.text(`Razón social: ${this.razon_social}`, 20, y);
+                }
+                if (this.afip_registration_type_id) {
+                    y += 10;
+                    doc.text(
+                        `Inscripción AFIP: ${this.afipTypes.find(
+                            (element) => element.id == this.afip_registration_type_id
+                        ).name
+                        }`,
+                        20,
+                        y
+                    );
+                }
+                if (this.country_id) {
+                    y += 10;
+                    doc.text(
+                        `País: ${this.countries.find(
+                            (element) => element.id == this.country_id
+                        ).nombre
+                        }`,
+                        20,
+                        y
+                    );
+                }
+
+                if (this.phone) {
+                    y += 10;
+                    doc.text(`Telefono: ${this.phone}`, 20, y);
+                }
+                if (this.email_contacto) {
+                    y += 10;
+                    doc.text(`Email: ${this.email_contacto}`, 20, y);
+                }
+                if (this.address) {
+                    y += 10;
+                    doc.text(`Dirección: ${this.address}`, 20, y);
+                }
+                if (this.website_url) {
+                    y += 10;
+                    doc.text(`Sitio web: ${this.website_url}`, 20, y);
+                }
+                if (this.brief) {
+                    y += 10;
+                    doc.text(`Brief: presentado`, 20, y);
+                }
+                if (this.cant_staff) {
+                    y += 10;
+                    doc.text(`Cantidad de personal:  ${this.cant_staff}`, 20, y);
+                }
+                if (this.cant_vehicles) {
+                    y += 10;
+                    doc.text(
+                        `Cantidad de vehículos/maquinaria:  ${this.cant_vehicles}`,
+                        20,
+                        y
+                    );
+                }
+                if (this.certifications) {
+                    y += 10;
+                    doc.text(`Certificaciónes:  ${this.certifications}`, 20, y);
+                }
+                if (this.dateRegister) {
+                    y += 30;
+                    doc.text(`Fecha y hora registro:  ${this.dateRegister}`, 20, y);
+                }
+                this.dateRegister;
+                doc.save("registro-minexus.pdf");
+            },
+        },
+      });
+
+            app.use(Maska);
+
+            app.mount("#app");
+        </script>
+
+        <style>
+            #app h1,
+            header {
+                font-size: 25px;
+            }
+
+            .bx-error-circle {
+                font-size: 85px;
+                color: #f44336;
+            }
+
+            .modal-footer {
+                justify-content: center !important;
+            }
+
+            #app h2 {
+                font-weight: normal;
+                font-size: 18px;
+            }
+
+            @media screen and (max-width: 450px) {
+
+                #app h1,
+                header {
+                    font-size: 20px;
+                }
+
+                .bx-error-circle {
+                    font-size: 40px;
+                }
+
+                #app h2 {
+                    font-weight: normal;
+                    font-size: 15px;
+                }
+            }
+        </style>
+    </body>
+
+</html>

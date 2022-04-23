@@ -1,0 +1,27 @@
+.contButon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+.button{
+    display: flex;
+    justify-content: center;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 9%);
+    &:hover{
+        background-color: #3e8e41;
+
+    }
+
+}
+}

@@ -1,0 +1,68 @@
+li{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    align-items: center;
+    border-radius: 5rem;
+    margin: 10px 0;
+   box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 9%);    
+   
+
+    .circle{
+     height: 40px;
+    width: 40px;
+    display: block;
+    color: #c5c3c324;
+    background: rgba(219, 7, 173, 0.05);
+    box-shadow: 2px 4px 10px 0px #33333396;
+    border-radius: 50%;
+    position: relative;
+  
+  
+
+    .ico-tacho{
+        color:red;
+        font-size: 20px;
+        
+        position: absolute;
+        font-size: 20px;
+        top: 29%;
+        left: 29%;
+    
+    }
+
+    .ico-check{
+        color: black;
+        font-size: 20px;
+        position: absolute;
+        font-size: 20px;
+        top: 29%;
+        left: 29%;
+
+    }
+    .ico-check--active{
+        color: green;
+        font-size: 20px;
+        position: absolute;
+        font-size: 20px;
+        top: 29%;
+        left: 29%;
+    }
+&:hover{
+    background: rgba(173, 173, 173, 0.281);
+}
+
+    }
+
+
+    .textItem{
+        display: inline-block;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    }
+    .textItem--completed{
+        text-decoration: line-through;
+    }   
+    
+}
