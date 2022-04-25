@@ -4,18 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function TodoItems(props) {
-  const Oncomplete = () => {
-    alert("complete" + " " + props.text);
-  };
-  const OnDelete = () => {
-    alert("delete" + " " + props.text);
-  };
-
   return (
     <li className="list">
       <span className="circle circleShaw">
         <FontAwesomeIcon
-          onClick={() => Oncomplete()}
+          onClick={() => props.onComplete()}
           className={`ico-check ${props.completed && "ico-check--active"}`}
           icon={faCheck}
         />
@@ -25,7 +18,7 @@ function TodoItems(props) {
       </p>
       <span className="circle">
         <FontAwesomeIcon
-          onClick={() => OnDelete()}
+          onClick={() => props.onDelete()}
           className="ico-tacho"
           icon={faTrash}
         />
