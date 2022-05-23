@@ -1,15 +1,39 @@
 
 .titulo{
-    background-color: lightgray;
+    background-color: #786AB5;
     border-radius: 0.3rem;
     margin: 10px;
     h2{
         font-family: 'Bebas Neue', cursive;
-        font-size: 50px;
+        font-size: 30px;
         padding: 10px;
+        color: white;
     }
 }
 
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1280px) {
+    .titulo{
+        h2{
+            font-size: 50px;
+        }
+    }
+}
+
+
+@media only screen and (min-width: 1281px) and (max-width: 1920px) {
+
+    .titulo{
+        h2{
+            font-size: 50px;
+        }
+    }
+
+}
 
 
 

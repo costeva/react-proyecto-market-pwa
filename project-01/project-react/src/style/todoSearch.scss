@@ -2,7 +2,10 @@
 
     justify-content: center;
     display: flex;
-
+    
+    
+    
+    
     label{
         font-size:20px;
         display:flex;
@@ -27,4 +30,24 @@
     input:focus{
         outline-color: fuchsia;
     }
+   
+   
+   
+   
 }
+
+.cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+.cardSty{
+     width: 80%;
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+     
+     
+   }
