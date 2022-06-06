@@ -1,9 +1,4 @@
 {
-  "short_name": "MarK List",
-  "name": "market List",
-  "description":"App para hacer tu lista de supermercados.",
-  "scope":"./",
-  "lang":"es-AR",
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
@@ -453,11 +448,5 @@
       "src": "ios/1024.png",
       "sizes": "1024x1024"
     }
-  ],
- 
-  "start_url": ".",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }
